@@ -3,16 +3,26 @@ const axios = require('axios');
 
 const routes = new Router();
 
-const data = axios
-  .get(
-    'https://api.themoviedb.org/3/movie/76341?api_key=4128b7117a353c53f0e30496fa69220b'
-  )
-  .then((response) => response.data);
+function logRequest(request, response, next) {
+  const { method, url } = request;
 
-routes.get('/listar', async (req, res) => {
-  await console.log(data);
+  const logLabel = `[${method.toUpperCase()}] ${url}`;
 
-  return res.json({ message: 'ok' });
+  console.log(logLabel);
+
+  next();
+}
+
+routes.get('/listar', logRequest, async (req, res) => {
+  const resposta = await axios
+    .get(
+      'https://api.themoviedb.org/3/movie/76341?api_key=4128b7117a353c53f0e30496fa69220b'
+    )
+    .then((response) => response);
+
+  const { data } = resposta;
+
+  return res.json(data);
 });
 
 module.exports = routes;
