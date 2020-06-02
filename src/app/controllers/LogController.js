@@ -2,9 +2,19 @@ const Log = require('../models/Log');
 const api = require('../../services/api');
 
 class LogController {
-  async findMovieById(req, res) {
+  async logRequest(req, res, next) {
     const { method, url } = req;
-    const { id } = req.params;
+
+    await Log.create({
+      request_method: method.toUpperCase(),
+      request_url: url,
+      request_date: new Date(),
+    });
+    next();
+  }
+
+  async findMovieById(request, response, next) {
+    const { id } = request.params;
 
     const movieResponse = await api
       .get(`movie/${id}`, {
@@ -13,9 +23,7 @@ class LogController {
           language: 'pt-BR',
         },
       })
-      .then((response) => response);
-
-    const { config } = movieResponse;
+      .then((res) => res);
 
     const {
       original_title,
@@ -32,15 +40,31 @@ class LogController {
       backdrop_path,
       genres,
     };
+    next();
 
-    await Log.create({
-      request_method: method.toUpperCase(),
-      request_url: url,
-      request_date: new Date(),
-      api_url: `${config.baseURL}/${config.url}?api_key=${config.params.api_key}&language=${config.params.language}`,
-    });
+    return response.json(movie);
+  }
 
-    return res.json(movie);
+  async listMovie(request, response, next) {
+    const { genre, actor } = request.query;
+
+    const movieResponse = await api
+      .get('discover/movie', {
+        params: {
+          api_key: '4128b7117a353c53f0e30496fa69220b',
+          language: 'pt-BR',
+          region: 'BR',
+          with_genres: genre,
+          with_people: actor,
+        },
+      })
+      .then((res) => res);
+
+    const movieList = movieResponse.data;
+
+    next();
+
+    return response.json(movieList);
   }
 }
 

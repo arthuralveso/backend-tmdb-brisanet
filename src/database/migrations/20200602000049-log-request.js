@@ -19,10 +19,6 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      api_url: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
