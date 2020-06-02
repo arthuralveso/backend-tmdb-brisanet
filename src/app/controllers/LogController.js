@@ -1,11 +1,11 @@
-const axios = require('axios');
 const Log = require('../models/Log');
+const api = require('../../services/api');
 
 class LogController {
   async store(req, res) {
-    const resposta = await axios
+    const resposta = await api
       .get(
-        'https://api.themoviedb.org/3/movie/76341?api_key=4128b7117a353c53f0e30496fa69220b&language=pt-br'
+        'movie/76341?api_key=4128b7117a353c53f0e30496fa69220b&language=pt-br'
       )
       .then((response) => response);
 

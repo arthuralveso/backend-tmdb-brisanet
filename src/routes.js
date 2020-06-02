@@ -3,6 +3,6 @@ const LogController = require('./app/controllers/LogController');
 
 const routes = new Router();
 
-routes.get('/', LogController.store);
+routes.get('/movie', LogController.store);
 
 module.exports = routes;
