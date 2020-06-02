@@ -15,6 +15,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      request_date: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
       api_url: {
         type: Sequelize.STRING,
         allowNull: false,

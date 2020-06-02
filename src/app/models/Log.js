@@ -7,6 +7,7 @@ class Log extends Model {
       {
         request_method: Sequelize.STRING,
         request_url: Sequelize.STRING,
+        request_date: Sequelize.DATE,
         api_url: Sequelize.STRING,
       },
       {
