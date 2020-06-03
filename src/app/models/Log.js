@@ -10,11 +10,6 @@ class Log extends Model {
         request_date: Sequelize.DATE,
       },
       {
-        modelName: 'logs',
-        timestamps: false,
-        freezeTableName: true,
-        underscored: false,
-        tableName: 'logs',
         sequelize,
       }
     );
