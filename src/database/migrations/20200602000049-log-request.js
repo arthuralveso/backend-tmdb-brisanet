@@ -22,15 +22,21 @@ module.exports = {
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
+        timestamps: true,
+        underscored: true,
+        underscoredAll: true,
       },
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
+        timestamps: true,
+        underscored: true,
+        underscoredAll: true,
       },
     });
   },
 
   down: (queryInterface) => {
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('logs');
   },
 };

@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
-const databaseConfig = require('../config/database');
+// const databaseConfig = require('../config/database');
 const Log = require('../app/models/Log');
+require('dotenv/config');
 
 const models = [Log];
 
@@ -10,7 +11,13 @@ class Database {
   }
 
   init() {
-    this.connection = new Sequelize(databaseConfig);
+    this.connection = new Sequelize(process.env.DATABASE_URL, {
+      define: {
+        timestamps: true,
+        underscored: true,
+        underscoredAll: true,
+      },
+    });
 
     models.map((model) => model.init(this.connection));
   }

@@ -10,7 +10,6 @@ class Log extends Model {
         request_date: Sequelize.DATE,
       },
       {
-        tableName: 'logs',
         sequelize,
       }
     );
