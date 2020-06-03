@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+const authConfig = require('../../config/auth');
 const api = require('../../services/api');
 
 class GuestSessionController {
@@ -11,10 +13,14 @@ class GuestSessionController {
       .then((res) => res);
 
     const sessionData = guestSession.data;
+    const id = sessionData.guest_session_id;
 
-    next();
-
-    return response.json(sessionData);
+    return response.json({
+      sessionData,
+      token: jwt.sign({ id }, authConfig.secret, {
+        expiresIn: authConfig.expiresIn,
+      }),
+    });
   }
 }
 

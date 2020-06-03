@@ -30,7 +30,6 @@ class MovieController {
       release_date,
       genres,
     };
-    next();
 
     return response.json(movie);
   }
@@ -52,8 +51,6 @@ class MovieController {
 
     const movieList = movieResponse.data;
 
-    next();
-
     return response.json(movieList);
   }
 
@@ -72,8 +69,6 @@ class MovieController {
       .then((res) => res);
 
     const movie = movieResponse.data;
-
-    next();
 
     return response.json(movie);
   }
@@ -97,8 +92,6 @@ class MovieController {
       .then((res) => res);
 
     const movie = movieResponse.data;
-
-    next();
 
     return response.json(movie);
   }

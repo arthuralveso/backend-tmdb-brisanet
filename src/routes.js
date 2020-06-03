@@ -2,26 +2,16 @@ const { Router } = require('express');
 const LogController = require('./app/controllers/LogController');
 const MovieController = require('./app/controllers/MovieController');
 const GuestSessionController = require('./app/controllers/GuestSessionController');
+const authMiddleware = require('./app/middlewares/auth');
 
 const routes = new Router();
 
-routes.get('/movie/:id', MovieController.indexById, LogController.logRequest);
-routes.get('/discover/movie', MovieController.index, LogController.logRequest);
-routes.get(
-  '/search/movie',
-  MovieController.indexByName,
-  LogController.logRequest
-);
-routes.post(
-  '/movie/:id/rating',
-  MovieController.store,
-  LogController.logRequest
-);
+routes.use(LogController.logRequest);
+routes.get('/session/new', GuestSessionController.index);
 
-routes.get(
-  '/session/new',
-  GuestSessionController.index,
-  LogController.logRequest
-);
+routes.get('/movie/:id', authMiddleware, MovieController.indexById);
+routes.get('/discover/movie', authMiddleware, MovieController.index);
+routes.get('/search/movie', authMiddleware, MovieController.indexByName);
+routes.post('/movie/:id/rating', authMiddleware, MovieController.store);
 
 module.exports = routes;
