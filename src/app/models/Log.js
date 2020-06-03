@@ -15,6 +15,5 @@ class Log extends Model {
     );
   }
 }
-Log.sync({ force: true });
 
 module.exports = Log;
