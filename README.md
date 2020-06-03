@@ -1,7 +1,6 @@
 # API realizada para expor a api do [https://www.themoviedb.org/documentation/api](https://www.themoviedb.org/documentation/api)
 
-Back-end foi desenvolvido utilizando Node.js, express, nodemon, sequelize e postgreSQL. Para testar as requisições utilizei o Insomnia. E para validação dos dados uma biblioteca chamada Yup.
-
+Back-end foi desenvolvido utilizando Node.js, express, nodemon, sequelize e postgreSQL. Para testar as requisições utilizei o Insomnia.
 # Como executar o back-end
 
 ```
