@@ -4,6 +4,7 @@ const api = require('../../services/api');
 require('dotenv/config');
 
 class GuestSessionController {
+  // eslint-disable-next-line consistent-return
   async index(request, response, next) {
     try {
       const guestSession = await api
